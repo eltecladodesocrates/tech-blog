@@ -20,7 +20,7 @@ const AppRouter = () => {
                 <Route path='/create' component={Create}/>
                 <Route path='/signup' component={Signup} />
                 <Route path='/post/:id' component={Post} />
-                <Route path='/edit' exact component={Edit} />
+                <Route path='/edit/:id' component={Edit} />
             </Switch>
             <Footer />
         </BrowserRouter>

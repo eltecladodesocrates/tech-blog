@@ -1,11 +1,29 @@
-import React from 'react'
+/* eslint-disable array-callback-return */
+/* eslint-disable eqeqeq */
+import React, {useContext} from 'react'
 
-const Edit = () => {
+import PostForm from '../components/PostForm'
+import { PostContext } from '../context/posts'
+
+const Edit = ({ match }) => {
+
+    const {posts} = useContext(PostContext)
+
     return (
         <div>
-            Edit Page
+            {posts.map( post => {
+                if (post.id == match.params.id) {
+                    return (
+                        <PostForm 
+                            key={post.id}
+                            post={post}
+                        />
+                    )
+                }
+            })}
         </div>
     )
 }
 
 export default Edit
+
