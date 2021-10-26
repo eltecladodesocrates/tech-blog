@@ -9,6 +9,7 @@ import Signup from '../Pages/Signup'
 import Post from '../components/Post'
 import Edit from '../Pages/Edit'
 import Footer from '../components/Footer'
+import NotFound from '../Pages/NotFound'
 
 const AppRouter = () => {
     return (
@@ -21,6 +22,7 @@ const AppRouter = () => {
                 <Route path='/signup' component={Signup} />
                 <Route path='/post/:id' component={Post} />
                 <Route path='/edit/:id' component={Edit} />
+                <Route component={NotFound} />
             </Switch>
             <Footer />
         </BrowserRouter>
