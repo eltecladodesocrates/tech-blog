@@ -1,4 +1,4 @@
-import { getDatabase, ref, push, get, child } from "firebase/database"
+import { getDatabase, ref, push, get, child, remove } from "firebase/database"
 import { db } from "../firebase/firebase"
 const dbRef = ref(getDatabase())
 
@@ -41,44 +41,23 @@ export const startGetPosts = (dispatch) => {
     })
 }
 
+const deletePost = (id) => ({
+    type: 'DELETE_POST',
+    id
+}) 
+
+
+export const startDeletePost = (dispatch, id, title) => {
+    remove(ref(db, `posts/${id}`)).then(() => {
+        dispatch(deletePost(id))
+        console.log(`Post "${title}" has been removed`)
+    })
+}
 // import { getDatabase ,push, ref, child, get, remove } from 'firebase/database'
 // import { db } from '../firebase/firebase'
 // const dbRef = ref(getDatabase())
 
 
-// export const startCreateHabit = (dispatch, habit, uid) => {
-//     // Save to Real Time DB
-//     // push(ref(db, `users/${uid}/habits`), habit).then( res => {
-//     //     const habitId = res._path.pieces_[3]
-//     //     dispatch(createHabit(habit, habitId))
-//     // })
-
-//     // Save to local storage
-//     const habitId = Date.now()
-//     dispatch(createHabit(habit, habitId))
-// }
-
-// export const startGetHabits = (dispatch, uid, habits = '') => {
-
-//     // Get data from real time db
-//     // get(child(dbRef, `users/${uid}/habits`)).then(( snapshot) => {
-//     //     const habits = []
-//     //     snapshot.forEach( child => {
-//     //         habits.push({
-//     //             id: child.key,
-//     //             ...child.val()
-//     //         })
-//     //     })
-//     //     console.log('Getting habits from DB');
-//     //     dispatch(getHabits(habits))
-//     // }).catch( e => {
-//     //     console.log(e)
-//     // })  
-
-//     // Get data from local storage
-//     dispatch(getHabits(habits)) 
-
-// }
 
 // export const updateHabit = (id) => ({
 //     type: 'UPDATE_HABIT',
