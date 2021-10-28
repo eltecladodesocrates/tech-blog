@@ -1,4 +1,4 @@
-import { getDatabase, ref, push, get, child, remove } from "firebase/database"
+import { getDatabase, ref, push, get, child, remove, update } from "firebase/database"
 import { db } from "../firebase/firebase"
 const dbRef = ref(getDatabase())
 
@@ -22,7 +22,7 @@ export const startCreatePost = (dispatch, post) => {
 
 // Read
 
-const getPosts = (posts) => ({
+export const getPosts = (posts) => ({
     type: 'GET_POSTS',
     posts
 })
@@ -41,6 +41,23 @@ export const startGetPosts = (dispatch) => {
     })
 }
 
+// Update
+
+const updatePost = (id, updates) => ({
+    type: 'UPDATE_POST',
+    id,
+    updates
+})
+
+export const startUpdatePost = (dispatch, id, updates) => {
+    update(ref(db, `posts/${id}`), updates).then(() => {
+        dispatch(updatePost(id, updates))
+        console.log('Post has been updated')
+    })
+}
+
+// Delete
+
 const deletePost = (id) => ({
     type: 'DELETE_POST',
     id
@@ -53,30 +70,4 @@ export const startDeletePost = (dispatch, id, title) => {
         console.log(`Post "${title}" has been removed`)
     })
 }
-// import { getDatabase ,push, ref, child, get, remove } from 'firebase/database'
-// import { db } from '../firebase/firebase'
-// const dbRef = ref(getDatabase())
-
-
-
-// export const updateHabit = (id) => ({
-//     type: 'UPDATE_HABIT',
-//     id
-// })
-
-// // Building the action
-
-// const deleteHabit = (id, updates) => ({
-//     type: 'DELETE_HABIT',
-//     id,
-//     updates
-// })
-
-// export const startDeleteHabit = (dispatch, uid, id) => {
-//     remove(ref(db, `users/${uid}/habits/${id}`)).then(() => {
-//         dispatch(deleteHabit(id))
-//         console.log(`Item ${id} removed`)
-//     })
-// }
-
 

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 
 import { PostContext } from '../context/posts'
-import { startCreatePost } from '../actions/post'
+import { startCreatePost, startUpdatePost } from '../actions/post'
 
 const PostForm = ({ post }) => {
 
@@ -11,7 +11,11 @@ const PostForm = ({ post }) => {
 
   const handleAddContent = e => {
     e.preventDefault()
-    startCreatePost(postsDispatch, {title, content})
+    if (post) {
+      startUpdatePost(postsDispatch, post.id, {title, content})
+    } else {
+      startCreatePost(postsDispatch, {title, content})
+    }
   }
 
   console.log(posts)
