@@ -6,6 +6,11 @@ export const postReducer = (state, action) => {
                 ...state,
                 action.post
             ]
+        
+        case 'GET_POSTS':
+            return action.posts
+
+        
     
         default:
             return state

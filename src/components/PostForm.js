@@ -1,19 +1,17 @@
 import React, { useState, useContext } from 'react'
 
 import { PostContext } from '../context/posts'
-import { createPost } from '../actions/post'
+import { startCreatePost } from '../actions/post'
 
 const PostForm = ({ post }) => {
 
   const [title, setTitle] = useState(post ? post.title : '')
   const [content, setContent] = useState(post ? post.content : '')
   const {posts, postsDispatch} = useContext(PostContext)
-  const id = Date.now()
-  console.log(post)
 
   const handleAddContent = e => {
     e.preventDefault()
-    postsDispatch(createPost(id, title, content))
+    startCreatePost(postsDispatch, {title, content})
   }
 
   console.log(posts)
