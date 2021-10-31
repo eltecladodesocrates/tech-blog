@@ -4,12 +4,14 @@ const dbRef = ref(getDatabase())
 
 // Create
 
-const createPost = ({title, content}, id) => ({
+const createPost = ({title, content, createdAt, topic}, id) => ({
     type: 'CREATE_POST',
     post: {
         id,
         title,
-        content
+        content,
+        createdAt,
+        topic
     }
 })
 
