@@ -10,7 +10,7 @@ const PostContextProvider = ({ children }) => {
     const [posts, postsDispatch] = useReducer(postReducer, [])
 
     useEffect(() => {
-        startGetPosts(postsDispatch)
+        // startGetPosts(postsDispatch)
     }, [])
 
     return (
